@@ -2,10 +2,13 @@ import logo from '../src/assets/img/pizza-logo.svg'
 
 import './index.scss';
 
+import Button from './components/Button';
+
 const App = () => {
   return (
     <div className="wrapper">
       <div className="header">
+        <Button outline>Кнопка</Button>
         <div className="container">
           <div className="header__logo">
             <img width="38" src={logo} alt="Pizza logo" />
