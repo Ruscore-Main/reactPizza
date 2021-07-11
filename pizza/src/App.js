@@ -1,14 +1,13 @@
-import logo from '../src/assets/img/pizza-logo.svg'
+import logo from '../src/assets/img/pizza-logo.svg';
 
 import './index.scss';
 
-import Button from './components/Button';
+import {Button, Categories} from './components';
 
 const App = () => {
   return (
     <div className="wrapper">
       <div className="header">
-        <Button outline>Кнопка</Button>
         <div className="container">
           <div className="header__logo">
             <img width="38" src={logo} alt="Pizza logo" />
@@ -18,7 +17,7 @@ const App = () => {
             </div>
           </div>
           <div className="header__cart">
-            <a href="/cart.html" className="button button--cart">
+            <Button className="button--cart">
               <span>520 ₽</span>
               <div className="button__delimiter"></div>
               <svg
@@ -50,23 +49,20 @@ const App = () => {
                 />
               </svg>
               <span>3</span>
-            </a>
+            </Button>
           </div>
         </div>
       </div>
       <div className="content">
         <div className="container">
           <div className="content__top">
-            <div className="categories">
-              <ul>
-                <li className="active">Все</li>
-                <li>Мясные</li>
-                <li>Вегетарианская</li>
-                <li>Гриль</li>
-                <li>Острые</li>
-                <li>Закрытые</li>
-              </ul>
-            </div>
+            <Categories items={[
+              'Мясные',
+              'Вегетарианская',
+              'Гриль',
+              'Острые',
+              'Закрытые'
+            ]} />
             <div className="sort">
               <div className="sort__label">
                 <svg
