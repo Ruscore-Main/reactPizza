@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const SortPopup = ({items}) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [currentSort, setCurrentSort] = useState('популярности');
+    const [currentSort, setCurrentSort] = useState(0);
     const sortRef = useRef(null);
 
     useEffect(() => {
@@ -34,17 +34,17 @@ const SortPopup = ({items}) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={toggleVisiblePopup}>{currentSort}</span>
+                <span onClick={toggleVisiblePopup}>{items[currentSort].name}</span>
             </div>
             {visiblePopup && (
                 <div className="sort__popup">
                     <ul>
-                        {items.map((el, i) => (
+                        {items.map((obj, i) => (
                             <li
-                                key={`${el}_${i}`}
-                                className={`${el === currentSort ? 'active' : ''}`}
-                                onClick={() => setCurrentSort(el)}>
-                                {el}
+                                key={`${obj.type}_${i}`}
+                                className={`${i === currentSort ? 'active' : ''}`}
+                                onClick={() => setCurrentSort(i)}>
+                                {obj.name}
                             </li>
                         ))}
                     </ul>
