@@ -16,6 +16,13 @@ const filters = (state = initialState, action) => {
       };
     }
 
+    case SET_CATEGORY: {
+      return {
+        ...state,
+        category: action.payload
+      };
+    }
+
     default:
       return state;
   }

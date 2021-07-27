@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSortBy } from '../redux/actions/filters';
 
 const SortPopup = ({items}) => {
+    // redux-side
+    const dispatch = useDispatch();
+
+    //react-side
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [currentSort, setCurrentSort] = useState(0);
     const sortRef = useRef(null);
@@ -43,7 +49,10 @@ const SortPopup = ({items}) => {
                             <li
                                 key={`${obj.type}_${i}`}
                                 className={`${i === currentSort ? 'active' : ''}`}
-                                onClick={() => setCurrentSort(i)}>
+                                onClick={() => {
+                                    dispatch(setSortBy(obj.type))
+                                    setCurrentSort(i)
+                                    }}>
                                 {obj.name}
                             </li>
                         ))}

@@ -4,7 +4,7 @@ import filtersReducer from './filters';
 import pizzasReducer from './pizzas';
 
 const mainReducer = combineReducers({
-  filter: filtersReducer,
+  filters: filtersReducer,
   pizzas: pizzasReducer,
 });
 
