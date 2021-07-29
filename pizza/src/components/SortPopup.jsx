@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSortBy } from '../redux/actions/filters';
 
-const SortPopup = ({items}) => {
+// React.memo позволяет перерендерить компоненту если только обновились props
+
+const SortPopup = React.memo(({items}) => {
     // redux-side
     const dispatch = useDispatch();
 
@@ -61,6 +63,6 @@ const SortPopup = ({items}) => {
             )}
         </div>
     );
-};
+});
 
 export default SortPopup;
