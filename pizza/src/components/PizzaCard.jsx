@@ -69,7 +69,7 @@ const PizzaCard = ({ imageUrls, name, price, sizes, types }) => {
 
 PizzaCard.propTypes = {
   name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.arrayOf(PropTypes.string.isRequired),
   price: PropTypes.number.isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired

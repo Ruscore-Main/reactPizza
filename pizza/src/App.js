@@ -1,25 +1,16 @@
-import './index.scss';
+import "./index.scss";
 
-import { Home, Basket } from './pages';
-import { Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Home, Basket } from "./pages";
+import { Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import Header from './components/Header';
-import React from 'react';
-import { setPizzas } from './redux/actions/pizzas';
-
+import Header from "./components/Header";
+import React from "react";
 
 const App = () => {
-
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    axios.get('http://localhost:3001/db.json')
-    .then(resp => dispatch(setPizzas(resp.data.pizzas)))
-  }, [])
-
+  
 
   return (
     <div className="wrapper">
@@ -30,6 +21,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

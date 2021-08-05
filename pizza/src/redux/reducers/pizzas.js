@@ -1,8 +1,9 @@
-const SET_PIZZAS = 'SET_PIZZAS';
+const SET_PIZZAS = "SET_PIZZAS",
+  SET_LOADED = "SET_LOADED";
 
 const initialState = {
   items: [],
-  isLoaded: false
+  isLoaded: false,
 };
 
 const pizzas = (state = initialState, action) => {
@@ -11,7 +12,14 @@ const pizzas = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload,
-        isLoaded: true
+        isLoaded: true,
+      };
+    }
+
+    case SET_LOADED: {
+      return {
+        ...state,
+        isLoaded: action.payload
       };
     }
 

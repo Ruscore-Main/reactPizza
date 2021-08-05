@@ -4,13 +4,12 @@ import { setSortBy } from '../redux/actions/filters';
 
 // React.memo позволяет перерендерить компоненту если только обновились props
 
-const SortPopup = React.memo(({items}) => {
+const SortPopup = React.memo(({items, currentSort}) => {
     // redux-side
     const dispatch = useDispatch();
 
     //react-side
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [currentSort, setCurrentSort] = useState(0);
     const sortRef = useRef(null);
 
     useEffect(() => {
@@ -42,7 +41,7 @@ const SortPopup = React.memo(({items}) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={toggleVisiblePopup}>{items[currentSort].name}</span>
+                <span onClick={toggleVisiblePopup}>{items.find(el => el.type === currentSort).name}</span>
             </div>
             {visiblePopup && (
                 <div className="sort__popup">
@@ -50,11 +49,8 @@ const SortPopup = React.memo(({items}) => {
                         {items.map((obj, i) => (
                             <li
                                 key={`${obj.type}_${i}`}
-                                className={`${i === currentSort ? 'active' : ''}`}
-                                onClick={() => {
-                                    dispatch(setSortBy(obj.type))
-                                    setCurrentSort(i)
-                                    }}>
+                                className={`${obj.type === currentSort ? 'active' : ''}`}
+                                onClick={() => dispatch(setSortBy(obj.type))}>
                                 {obj.name}
                             </li>
                         ))}

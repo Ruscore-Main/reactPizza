@@ -3,7 +3,7 @@ const
   SET_CATEGORY = 'SET_CATEGORY';
 
 const initialState = {
-  category: 0,
+  category: null,
   sortBy: 'popular',
 };
 
