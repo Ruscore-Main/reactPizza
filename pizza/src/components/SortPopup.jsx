@@ -17,7 +17,9 @@ const SortPopup = React.memo(({items, currentSort}) => {
     }, []); // [] - зависимости, если изменится, то произойдет вызов эффекта. тут их нет, значит сработает только при первом рендере
 
     const handleOutsideClick = (e) => {
-        if (!e.path.some((el) => el === sortRef.current)) setVisiblePopup(false);
+        const path = e.path || (e.composedPath && e.composedPath());
+
+        if (!path.some((el) => el === sortRef.current)) setVisiblePopup(false);
     };
 
     // отдельно вынесли, потому что при перерендере происходит создание новой ф-ии, что замедляет работу

@@ -1,11 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import BasketFull from './BasketFull';
+import BasketEmpty from './BasketEmpty';
 
 const Basket = () => {
-    return (
-        <div>
-            Корзина
-        </div>
-    )
-}
+  const {totalCount} = useSelector(state => state.cart);
 
-export default Basket
+  return (
+    <>
+      {
+      totalCount ? 
+      <BasketFull />
+      :<BasketEmpty />
+      }
+    </>
+  );
+};
+
+export default Basket;

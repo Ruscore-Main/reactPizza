@@ -2,22 +2,18 @@ import "./index.scss";
 
 import { Home, Basket } from "./pages";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import Header from "./components/Header";
 import React from "react";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  
 
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
         <Route exact path="/" render={() => <Home />} />
-        <Route exact path="/basket" render={Basket} />
+        <Route exact path="/basket" render={() => <Basket />} />
       </div>
     </div>
   );

@@ -2,20 +2,50 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Button from './Button';
 
-const PizzaCard = ({ imageUrls, name, price, sizes, types }) => {
+import { useSelector } from 'react-redux';
+import ImageLoader from './../assets/img/pizzaLogo.svg';
+
+const PizzaCard = ({ id, imageUrls, name, price, sizes, types, onClickAddPizza }) => {
   const availableTypes = ['тонкое', 'традиционное'];
-  const availableSizes = [26, 30, 40]
+  const availableSizes = [26, 30, 40];
   const [activeType, setActiveType] = React.useState(types[0]);
   const [activeSize, setActiveSize] = React.useState(sizes[0]);
+  const [imageLoaded, setImageLoaded] = React.useState(false);
 
-  
-  const onSelectType = index => setActiveType(index);
-  const onSelectSize = index => setActiveSize(index);
+  const items = useSelector(({ cart }) => cart.items);
+  const onSelectType = (index) => setActiveType(index);
+  const onSelectSize = (index) => {
+    setImageLoaded(false);
+    setActiveSize(index);
+  };
+  const onAddPizza = () => {
+    onClickAddPizza({
+      id,
+      currentImageUrl,
+      size: activeSize,
+      type: availableTypes[activeType],
+      price,
+      name,
+      imageUrl: imageUrls[sizes.findIndex((el) => activeSize == el)]
+    });
+  };
+  const onImageLoad = () => {
+    setImageLoaded(true);
+  };
+  const currentImageUrl = imageUrls[sizes.findIndex((el) => activeSize == el)];
 
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={imageUrls[sizes.findIndex(el => activeSize == el )]} alt="Pizza" />
+      <img
+          className="pizza-block__image"
+          onLoad={onImageLoad}
+          src={imageLoaded ? imageUrls[sizes.findIndex((el) => activeSize == el)] : ImageLoader}
+          alt="Pizza"
+        />
+      
+
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
@@ -25,29 +55,29 @@ const PizzaCard = ({ imageUrls, name, price, sizes, types }) => {
               key={type}
               className={classNames({
                 active: activeType === index,
-                disabled: !types.includes(index)
+                disabled: !types.includes(index),
               })}>
               {type}
             </li>
           ))}
         </ul>
         <ul>
-          {availableSizes.map(size => (
+          {availableSizes.map((size) => (
             <li
               onClick={() => onSelectSize(size)}
               key={size}
               className={classNames({
-              active: activeSize === size,
-              disabled: !sizes.includes(size)
-            })}>
-            {size} см.
-          </li>
+                active: activeSize === size,
+                disabled: !sizes.includes(size),
+              })}>
+              {size} см.
+            </li>
           ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button onClick={onAddPizza} outline className="button--add">
           <svg
             width="12"
             height="12"
@@ -60,25 +90,28 @@ const PizzaCard = ({ imageUrls, name, price, sizes, types }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          {items[id] ? <i>{items[id].length}</i> : ''}
+        </Button>
       </div>
     </div>
   );
 };
 
 PizzaCard.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.arrayOf(PropTypes.string.isRequired),
   price: PropTypes.number.isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+  types: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  onClickAddPizza: PropTypes.func.isRequired,
 };
 
 PizzaCard.defaulProps = {
   name: '-----',
   sizes: [],
-  types: []
-}
+  types: [],
+  imageUrls: [],
+};
 
 export default PizzaCard;
