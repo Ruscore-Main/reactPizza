@@ -33,6 +33,8 @@ const cart = (state = initialState, action) => {
       const index = state.items[pizza.id].findIndex(
         (el) => el.name === pizza.name && el.type === pizza.type && el.size === pizza.size,
       );
+
+      // если такая пицца существует
       if (~index) {
         
         state.items[pizza.id].splice(index, 1);
@@ -65,13 +67,17 @@ const cart = (state = initialState, action) => {
     // Удаление категории пицц из корзины
     case CLEAR_PIZZA_CART: {
       const pizza = action.payload;
+      // выделяем только оставшиеся пиццы
       const newPizzas = state.items[pizza.id].filter(el => el.type !== pizza.type || el.size !== pizza.size);
+      // изменение цены полсе удаления пицц
       const totalMinus = state.items[pizza.id].length - newPizzas.length
       const newItems = {
         ...state.items,
         // здеся просто добавляются пиццы по ключу, у каждой пиццы свой ключ, а у этого ключа массив этих пицц)))
         [pizza.id]: newPizzas,
       };
+
+      // если пицц больше нету по ключу, то удаляем ключ
       if (newItems[pizza.id].length === 0) {
         delete newItems[pizza.id];
       }

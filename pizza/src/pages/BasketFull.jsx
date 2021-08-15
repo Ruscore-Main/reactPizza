@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import BasketItem from '../components/BasketItem';
 import { clearCart } from '../redux/actions/cart';
@@ -105,13 +106,13 @@ function BasketFull (props) {
             console.log(s26tr, s30tr, s40tr, s26tk, s30tk, s40tk)
 
             return [
-            s26tr.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s26tr[0].imageUrl} price={s26tr.reduce((sum, el)=>sum+el.price, 0)} count={s26tr.length} size={26} type='традиционное'/> : '',
-            s30tr.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s30tr[0].imageUrl} price={s30tr.r0educe((sum, el)=>sum+el.price, 0)} count={s30tr.length} size={30} type='традиционное'/> : '',
-            s40tr.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s40tr[0].imageUrl} price={s40tr.reduce((sum, el)=>sum+el.price, 0)} count={s40tr.length} size={40} type='традиционное'/> : '',
+            s26tr.length ? <BasketItem pizza={s26tr[0]} name={name} imageUrl={s26tr[0].imageUrl} price={s26tr.reduce((sum, el)=>sum+el.price, 0)} count={s26tr.length} size={26} type='традиционное'/> : '',
+            s30tr.length ? <BasketItem pizza={s30tr[0]} name={name} imageUrl={s30tr[0].imageUrl} price={s30tr.r0educe((sum, el)=>sum+el.price, 0)} count={s30tr.length} size={30} type='традиционное'/> : '',
+            s40tr.length ? <BasketItem pizza={s40tr[0]} name={name} imageUrl={s40tr[0].imageUrl} price={s40tr.reduce((sum, el)=>sum+el.price, 0)} count={s40tr.length} size={40} type='традиционное'/> : '',
             
-            s26tk.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s26tk[0].imageUrl} price={s26tk.reduce((sum, el)=>sum+el.price, 0)} count={s26tk.length} size={26} type='тонкое'/> : '',
-            s30tk.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s30tk[0].imageUrl} price={s30tk.reduce((sum, el)=>sum+el.price, 0)} count={s30tk.length} size={30} type='тонкое'/> : '',
-            s40tk.length ? <BasketItem pizza={pizzas[0]} name={name} imageUrl={s40tk[0].imageUrl} price={s40tk.reduce((sum, el)=>sum+el.price, 0)} count={s40tk.length} size={40} type='тонкое'/> : ''
+            s26tk.length ? <BasketItem pizza={s26tk[0]} name={name} imageUrl={s26tk[0].imageUrl} price={s26tk.reduce((sum, el)=>sum+el.price, 0)} count={s26tk.length} size={26} type='тонкое'/> : '',
+            s30tk.length ? <BasketItem pizza={s30tk[0]} name={name} imageUrl={s30tk[0].imageUrl} price={s30tk.reduce((sum, el)=>sum+el.price, 0)} count={s30tk.length} size={30} type='тонкое'/> : '',
+            s40tk.length ? <BasketItem pizza={s40tk[0]} name={name} imageUrl={s40tk[0].imageUrl} price={s40tk.reduce((sum, el)=>sum+el.price, 0)} count={s40tk.length} size={40} type='тонкое'/> : ''
           ]
 
           })
@@ -131,7 +132,7 @@ function BasketFull (props) {
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <a href="/" className="button button--outline button--add go-back-btn">
+            <Link to="/" className="button button--outline button--add go-back-btn">
               <svg
                 width="8"
                 height="14"
@@ -148,7 +149,7 @@ function BasketFull (props) {
               </svg>
 
               <span>Вернуться назад</span>
-            </a>
+            </ Link>
             <div className="button pay-btn">
               <span>Оплатить сейчас</span>
             </div>
